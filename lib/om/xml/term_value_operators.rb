@@ -198,7 +198,8 @@ module OM::XML::TermValueOperators
       parent_select << term_pointer
       
       # If pointers in parent_select don't match with the indexes of built ancestors, correct the hash
-      if find_by_terms(*parent_select+[{}]).length == 0
+#STEVEN - edited
+      if find_by_terms(*parent_select+[{}]).length == 0 && !(parent_select.first.kind_of?(Hash) && parent_select.first.has_key?(:mods))
         if parent_select.last.kind_of?(Hash)
           suspect_pointer = parent_select.pop
           term_key = suspect_pointer.keys.first
